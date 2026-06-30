@@ -342,7 +342,10 @@ const Socials = () => {
       id="socials"
       ref={sectionRef}
       className="relative w-full min-h-screen overflow-hidden flex items-center justify-center"
-      style={{ background: gradients.bg }}
+      style={{ 
+        background: gradients.bg, 
+        paddingTop: 'var(--navbar-height, 96px)' 
+      }}
     >
       {/* ── Dynamic Keyframe Injection ── */}
       <style>{`
@@ -388,13 +391,6 @@ const Socials = () => {
         }}
       >
         LET'S CONNECT
-      </div>
-
-      {/* ── Section label ── */}
-      <div className="absolute top-10 left-10 z-[50] flex items-center gap-4 pointer-events-none">
-        <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '4px', textTransform: 'uppercase', color: colors.pink }}>06</span>
-        <div style={{ width: '32px', height: '1px', background: `linear-gradient(90deg,${colors.pink},${colors.cyan})` }} />
-        <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '4px', textTransform: 'uppercase', color: colors.textDim }}>Socials</span>
       </div>
 
       {/* ─────────────────────────────────────────────────────────
