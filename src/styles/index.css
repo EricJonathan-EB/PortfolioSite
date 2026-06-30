@@ -1,0 +1,166 @@
+@import "tailwindcss";
+
+body {
+  background-color: #06060f;
+  color: #f0ede8;
+  font-family: sans-serif;
+  margin: 0;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+  width: 0;
+}
+
+html {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+  width: 0;
+}
+
+/* ─── CRT Overlay ─────────────────────────────────────────── */
+
+.crt-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  border-radius: 0;
+  animation: crt-flicker 6s infinite;
+  /* Subtle screen curvature illusion via perspective */
+  mask-image: radial-gradient(ellipse 95% 95% at 50% 50%, black 60%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 95% 95% at 50% 50%, black 60%, transparent 100%);
+}
+
+/* 1. Scanlines — more visible, tighter pitch */
+.crt-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent   0px,
+    transparent   1px,
+    rgba(0, 0, 0, 0.18) 1px,
+    rgba(0, 0, 0, 0.18) 3px
+  );
+  /* Slow downward drift — like a real CRT scan */
+  animation: scanline-drift 12s linear infinite;
+}
+
+/* 2. Vignette + phosphor tint + RGB fringing */
+.crt-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 255, 160, 0.04) 0%,
+    rgba(0, 200, 120, 0.02) 30%,
+    rgba(0, 0,   0,   0.0)  50%,
+    rgba(0, 0,   0,   0.55) 100%
+  );
+  /* Chromatic aberration — very faint RGB channel shift */
+  box-shadow:
+    inset 0 0 80px  rgba(0,   0,   0,   0.6),
+    inset 0 0 20px  rgba(0,   255, 160, 0.06),
+    inset 0 0 3px   rgba(255, 0,   0,   0.08),
+    inset -3px 0 6px rgba(0,  0,   255, 0.05);
+}
+
+/* Scanline slow drift */
+@keyframes scanline-drift {
+  from { background-position: 0 0; }
+  to   { background-position: 0 100px; }
+}
+
+/* Flicker — more noticeable, irregular rhythm */
+@keyframes crt-flicker {
+  0%,  100% { opacity: 1;    }
+  40%        { opacity: 1;    }
+  41%        { opacity: 0.80; }
+  42%        { opacity: 1;    }
+  75%        { opacity: 1;    }
+  76%        { opacity: 0.91; }
+  77%        { opacity: 1;    }
+  78%        { opacity: 0.96; }
+  79%        { opacity: 1;    }
+}
+
+/* ─── CRT Noise burst ──────────────────────────────────────── */
+
+.crt-noise {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0;
+  /* SVG turbulence filter as background — pure CSS grain, no image needed */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  mix-blend-mode: overlay;
+  animation: noise-burst 7s steps(1) infinite;
+}
+
+@keyframes noise-burst {
+  0%,  100% { opacity: 0;    background-position: 0   0;   }
+
+  /* burst 1 */
+  22%        { opacity: 0;    }
+  22.1%      { opacity: 0.35; background-position: 40px  80px; }
+  22.3%      { opacity: 0.15; background-position: -20px 60px; }
+  22.5%      { opacity: 0;    }
+
+  /* burst 2 — stronger */
+  50%        { opacity: 0;    }
+  50.1%      { opacity: 0.5;  background-position: 100px 20px; }
+  50.2%      { opacity: 0.2;  background-position: -60px 40px; }
+  50.4%      { opacity: 0.4;  background-position: 20px  90px; }
+  50.6%      { opacity: 0;    }
+
+  /* burst 3 */
+  80%        { opacity: 0;    }
+  80.1%      { opacity: 0.25; background-position: -80px 10px; }
+  80.3%      { opacity: 0;    }
+}
+
+/* ─── Contact card internal scroll — thin neon-tinted bar ──── */
+.contact-card-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,60,110,0.35) transparent;
+}
+
+.contact-card-scroll::-webkit-scrollbar {
+  display: block;
+  width: 5px;
+}
+
+.contact-card-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.contact-card-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255,60,110,0.35);
+  border-radius: 4px;
+}
+
+.contact-card-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,60,110,0.55);
+}
+
+/* Native select dropdown arrow, styled to fit the dark UI */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ff3c6e' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 14px;
+  padding-right: 36px !important;
+}

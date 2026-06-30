@@ -1,0 +1,62 @@
+[
+  {
+    "id": "pub1",
+    "type": "IEEE Conference Paper",
+    "venue": "ICVADV-2026",
+    "title": "A Hybrid ML & Transformer Framework for Sentiment Analysis",
+    "subtitle": "Obesity-Related Social Media Conversations · IEEE Xplore",
+    "period": "Feb 2026",
+    "tag": "Published · IEEE",
+    "accentKey": "amber",
+    "status": "Published",
+    "desc": "Analysed 100,000+ obesity-related tweets (2017–2021) using a dual-annotation pipeline with TextBlob for lexicon-based scoring and RoBERTa for contextual labelling and then trained SVM, Naive Bayes, Random Forest, and LSTM classifiers. SVM achieved the highest accuracy at 93%, outperforming LSTM (72%) and highlighting the strength of classical ML on short-form social text. Presented at ICVADV-2026 (IEEE CIS) and indexed on IEEE Xplore.",
+    "meta": [
+      {
+        "label": "Venue",
+        "value": "ICVADV-2026 · IEEE CIS"
+      },
+      {
+        "label": "Domain",
+        "value": "NLP / Public Health"
+      },
+      {
+        "label": "Stack",
+        "value": "RoBERTa, SVM, LSTM, TF-IDF"
+      },
+      {
+        "label": "Best",
+        "value": "SVM · 93% Accuracy"
+      }
+    ]
+  },
+  {
+    "id": "pub2",
+    "type": "Indian Patent",
+    "venue": "Intellectual Property India",
+    "title": "Closed-Loop Liquid Dispensing System",
+    "subtitle": "Image-Based Spatial Targeting & Deposition Verification · App. No. 202641065168",
+    "period": "May 2026",
+    "tag": "Patent · Published",
+    "accentKey": "amber",
+    "status": "Published",
+    "desc": "A self-correcting agricultural rover that uses pixel-level computer vision to generate infection segmentation maps from plant surface images, converts them into precise nozzle orientation vectors, and dispenses pesticide micro-droplets only onto infected regions. Post-spray images close the loop detecting under-coverage or overspray and recalibrating nozzle angle, pulse duration, and pump activation automatically. Historical infection maps feed a time-series progression model for proactive treatment scheduling.",
+    "meta": [
+      {
+        "label": "App. No.",
+        "value": "202641065168"
+      },
+      {
+        "label": "Filed",
+        "value": "23 May 2026 · VIT Chennai"
+      },
+      {
+        "label": "Published",
+        "value": "05 Jun 2026 (U/S 11A)"
+      },
+      {
+        "label": "Field",
+        "value": "Computer Science · AgriTech"
+      }
+    ]
+  }
+]

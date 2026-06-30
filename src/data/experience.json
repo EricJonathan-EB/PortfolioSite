@@ -1,0 +1,26 @@
+[
+  {
+    "id": "e1",
+    "company": "Berribot",
+    "role": "Python Developer Intern",
+    "period": "Jun 2025 – Jul 2025",
+    "tag": "Industry",
+    "accentKey": "pink",
+    "desc": "Developed and deployed resilient Python-based web automation systems designed for real-time workflows. Focused heavily on adversarial web security by implementing advanced anti-bot evasion techniques such as dynamic user-agent rotation, WebGL/Canvas fingerprint spoofing, and human-like interaction delays to maintain high uptime in hostile environments. Gained practical experience with Agentic AI frameworks like Browser-Use, while also producing clear technical documentation and elegant pitch designs.",
+    "skills": ["Python", "Playwright", "Agentic AI", "Anti-Bot Evasion", "Web Scraping"],
+    "logo": "/pics/berribot_logo.jpg",
+    "certificate": "/pics/berri_certi.jpg"
+  },
+{
+  "id": "e2",
+  "company": "VIT Chennai",
+  "role": "Research Intern",
+  "period": "May 2025 – Jul 2025",
+  "tag": "Research",
+  "accentKey": "cyan",
+  "desc": "Designed ensemble stacking models for clinical survivability prediction and authored research on hybrid ML/Transformer pipelines. Participated in the Summer Research Internship Program under Prof. Dr. Manikandan P. Focused on healthcare AI, specifically designing an ensemble stacking architecture, aggregating base learners like LightGBM, CatBoost, and Random Forest to predict colorectal cancer survival rates using the SEER dataset. Implemented advanced pipelines featuring iterative imputation, recursive feature elimination, and hyperparameter optimization via the Pufferfish Optimization Algorithm (POA). Also contributed to research on hybrid ML/Transformer frameworks for public health sentiment analysis, focusing on pipeline rigor, clinical interpretability, and robust model validation.",
+  "skills": ["NLP", "Ensemble Learning", "Healthcare AI", "Research", "PyTorch"],
+  "logo": "/pics/vit.jpg",
+  "certificate": "/pics/vit_certi.jpg"
+}
+]

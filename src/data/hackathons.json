@@ -1,0 +1,86 @@
+[
+  {
+    "id":        "h1",
+    "name":      "Dataset'25",
+    "edition":   "DE2",
+    "result":    "3rd Place · IMPOWER",
+    "period":    "Dec 2025",
+    "tag":       "AI / Speech",
+    "accentKey": "violet",
+    "desc":      "36 hours, 3rd place at a national hackathon by ECDS & VIT Alumni, sponsored by KVB and ADRIG AI. Led Team DataDrive in building a dual-pipeline multilingual speech assessment system fine-tuned Whisper ASR on synthetic slurring data, phoneme-level error analysis, prosody & disfluency detection, and an LLM layer generating clinician-grade reports and parent-friendly summaries.",
+    "stack":     ["Whisper ASR", "Fine-tuning", "NLP", "LLM", "Audio ML", "Python"],
+    "stat":      { "value": "36h", "label": "Build Time" }
+  },
+  {
+    "id":        "h2",
+    "name":      "Hack4Health",
+    "edition":   "H4H",
+    "result":    "×2 Podium · R1 & R2",
+    "period":    "Aug – Sep 2025",
+    "tag":       "MedTech",
+    "accentKey": "violet",
+    "desc":      "Two rounds, two podium finishes. Round 1 presented and placed at IAIC 2025 (SpoRIC, VIT Chennai, Aug 28–29), getting shortlisted for Round 2. Round 2, 2nd place at the full MedTech hackathon by SCOPE in collaboration with Perfint Healthcare, V-NEST, and IIC (Sep 11–12). Designed the complete software pipeline, handled real-time data ingestion, built and validated ML models, and integrated software with hardware for live breath-hold detection.",
+    "stack":     ["Signal Processing", "ML", "Hardware Integration", "Python", "Real-time Data"],
+    "stat":      { "value": "×2", "label": "Podium Finishes" }
+  },
+  {
+    "id":        "h3",
+    "name":      "Smart India Hackathon",
+    "edition":   "SIH",
+    "result":    "Top 50 Nationally",
+    "period":    "2025",
+    "tag":       "National · AgriTech",
+    "accentKey": "violet",
+    "desc":      "Shortlisted top 50 out of 800+ teams across India for the national stage. Led system and pipeline design for AgroBot, a semi-automated pesticide rover using Raspberry Pi and computer vision for targeted plant infection detection, reducing chemical waste through precision spraying.",
+    "stack":     ["Raspberry Pi", "OpenCV", "Python", "ML", "Hardware", "CAD"],
+    "stat":      { "value": "800+", "label": "Teams Competed" }
+  },
+  {
+    "id":        "h4",
+    "name":      "YUVA AI Thon",
+    "edition":   "YAT",
+    "result":    "Participant · Innovation",
+    "period":    "Sep 2025",
+    "tag":       "Agentic AI",
+    "accentKey": "violet",
+    "desc":      "24-hour hackathon by YUVA Club, VIT Chennai, in collaboration with Young Indians and IBM. Built a multi-agent hybrid agentic AI system where domain-specific agents (feasibility, design, resources) collaborate under a master orchestrator to convert abstract ideas into step-by-step execution pipelines, PPT decks, and clinical-grade documentation.",
+    "stack":     ["Agentic AI", "Multi-agent", "LLM", "System Design", "Python"],
+    "stat":      { "value": "24h", "label": "Build Sprint" }
+  },
+  {
+    "id":        "h5",
+    "name":      "GlitchCon 2025",
+    "edition":   "GC",
+    "result":    "Participant · FinTech",
+    "period":    "Mar 2025",
+    "tag":       "FinTech · AI",
+    "accentKey": "violet",
+    "desc":      "24-hour hackathon by VIT Alumni Association. First deep dive into the financial domain and agentic AI, built a personalized financial advisory system that analyses users' bank statement spending histories to generate contextual, actionable financial guidance. Sparked an ongoing interest in AI for finance.",
+    "stack":     ["Agentic AI", "FinTech", "LLM", "Data Analysis", "Python"],
+    "stat":      { "value": "24h", "label": "Build Sprint" }
+  },
+  {
+    "id":        "h6",
+    "name":      "MedHack 2025",
+    "edition":   "MH",
+    "result":    "Student Coordinator",
+    "period":    "Dec 2025",
+    "tag":       "Organizer",
+    "accentKey": "violet",
+    "desc":      "Crossed to the other side of the table. Served as Student Coordinator for MEDHACK at VIT Chennai, managing registrations, providing technical support to teams on medical image processing challenges, and handling real-time logistics. Witnessing participants shape ideas into working solutions in real time reaffirmed why hackathons are such powerful learning environments.",
+    "stack":     ["Event Coordination", "Medical Imaging", "Team Ops", "Technical Support"],
+    "stat":      { "value": "SCOPE", "label": "VIT Chennai" }
+  },
+  {
+    "id":        "h7",
+    "name":      "REVIVE",
+    "edition":   "RVV",
+    "result":    "Participant · Origin",
+    "period":    "2024",
+    "tag":       "First Hackathon",
+    "accentKey": "violet",
+    "desc":      "Where it all started. Built and pitched an unmanned rover concept for assisting people trapped under rubble after disasters, made in collaboration with REVIVE, Humano1dX, and AutoVIT. The idea was ambitious, the execution nascent, but the experience introduced image processing and CAD design, igniting interests that define my work today.",
+    "stack":     ["Computer Vision", "CAD Design", "Rover Concept", "Hardware"],
+    "stat":      { "value": "#1", "label": "First Ever Hack" }
+  }
+]
