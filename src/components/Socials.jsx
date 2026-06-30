@@ -147,11 +147,19 @@ const computeState = (p) => {
 // ─── Validation Logic ────────────────────────────────────
 const validateFormConfig = (key, value, formType) => {
   if (key === 'name') {
-    if (!value.trim()) return 'Required'
+    // Name is optional for anonymous peer feedback, required for collab.
+    if (!value.trim()) {
+      return formType === 'collab' ? 'Required' : ''
+    }
     if (!/^[A-Za-z\s]{2,}$/.test(value)) return 'Letters only (min 2)'
   }
   if (key === 'email') {
-    if (!value.trim()) return 'Required'
+    // Email is optional for anonymous peer feedback, required for collab.
+    if (!value.trim()) {
+      return formType === 'collab' ? 'Required' : ''
+    }
+    // If they did type something, it still has to be a real email —
+    // otherwise we can't reply even if they wanted us to.
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return 'Invalid email'
   }
   if (key === 'siteFeedback' && formType === 'feedback') {
@@ -216,7 +224,7 @@ const Socials = () => {
     setErrorMsg('')
 
     const fieldsToValidate = form.formType === 'feedback' 
-      ? ['name', 'email', 'siteFeedback'] 
+      ? ['siteFeedback'] 
       : ['name', 'email', 'message']
     
     let hasErrors = false
@@ -536,18 +544,26 @@ const Socials = () => {
                 <div key={form.formType} className="crt-glitch-wrapper flex flex-col w-full">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-2">
                     <FieldInput 
-                      label="Your Name" value={form.name} required
+                      label="Your Name" value={form.name} required={form.formType === 'collab'}
                       onChange={v => updateField('name', v)} 
                       onBlur={() => handleBlurField('name')} 
-                      error={errors.name} touched={touched.name} placeholder="John Doe" 
+                      error={errors.name} touched={touched.name} 
+                      placeholder={form.formType === 'feedback' ? 'Anonymous (optional)' : 'John Doe'}
                     />
                     <FieldInput 
-                      label="Your Email" type="email" value={form.email} required
+                      label="Your Email" type="email" value={form.email} required={form.formType === 'collab'}
                       onChange={v => updateField('email', v)} 
                       onBlur={() => handleBlurField('email')}
-                      error={errors.email} touched={touched.email} placeholder="john@email.com" 
+                      error={errors.email} touched={touched.email} 
+                      placeholder={form.formType === 'feedback' ? 'Optional — for a reply' : 'john@email.com'}
                     />
                   </div>
+
+                  {form.formType === 'feedback' && (
+                    <p style={{ fontSize: '10px', color: colors.textDim, marginTop: '-6px', marginBottom: '10px', lineHeight: 1.5 }}>
+                      Feel free to send this anonymously. If you'd like a reply, leave your email — without it, I can read your feedback but can't write back.
+                    </p>
+                  )}
 
                   {form.formType === 'feedback' ? (
                     <>

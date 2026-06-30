@@ -21,13 +21,22 @@ const sanitizeInput = (str) => (typeof str === 'string' ? str.trim() : '');
 const validatePayload = (data) => {
   const { formType, name, email, siteFeedback, message } = data;
 
-  if (!name || !email || !formType) {
-    return 'Name, Email, and Form Type are required.';
+  if (!formType) {
+    return 'Form Type is required.';
   }
 
-  // Stricter email regex
+  // Name & email are required for collab/work inquiries (you need to be
+  // able to reply), but optional for anonymous peer feedback.
+  if (formType === 'collab') {
+    if (!name) return 'Name is required.';
+    if (!email) return 'Email is required.';
+  }
+
+  // Stricter email regex — only enforced if an email was actually given.
+  // For feedback this lets someone submit with no email at all (anonymous),
+  // but still rejects a garbled one if they bothered typing something.
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  if (!emailRegex.test(email)) {
+  if (email && !emailRegex.test(email)) {
     return 'Please provide a valid email address.';
   }
 
@@ -40,8 +49,8 @@ const validatePayload = (data) => {
   }
 
   // Name length validation to prevent massive spam strings
-  if (name.length > 80) return 'Name is too long.';
-  if (email.length > 100) return 'Email is too long.';
+  if (name && name.length > 80) return 'Name is too long.';
+  if (email && email.length > 100) return 'Email is too long.';
 
   return null; // No errors
 };
@@ -54,9 +63,11 @@ const buildEmailTemplate = (data) => {
     suggestions, company, role, inquiryType, message
   } = data;
 
+  const displayName = name || 'Anonymous';
+
   const subject = formType === 'feedback'
-    ? `[Portfolio] 💡 New Feedback from ${name}`
-    : `[Portfolio] 🚀 New Inquiry from ${name}`;
+    ? `[Portfolio] 💡 New Feedback from ${displayName}`
+    : `[Portfolio] 🚀 New Inquiry from ${displayName}`;
 
   const isFeedback = formType === 'feedback';
   
@@ -88,11 +99,14 @@ const buildEmailTemplate = (data) => {
                     <tr>
                       <td style="padding-bottom: 10px;">
                         <span style="font-size: 12px; font-weight: 700; color: #a1a1aa; text-transform: uppercase; letter-spacing: 1px;">From</span><br>
-                        <span style="font-size: 16px; color: #27272a; font-weight: 500;">${escapeHtml(name)}</span>
+                        <span style="font-size: 16px; color: #27272a; font-weight: 500;">${escapeHtml(displayName)}</span>
                       </td>
                       <td style="padding-bottom: 10px; text-align: right;">
                         <span style="font-size: 12px; font-weight: 700; color: #a1a1aa; text-transform: uppercase; letter-spacing: 1px;">Email</span><br>
-                        <a href="mailto:${escapeHtml(email)}" style="font-size: 16px; color: ${ACCENT_COLOR}; font-weight: 500; text-decoration: none;">${escapeHtml(email)}</a>
+                        ${email
+                          ? `<a href="mailto:${escapeHtml(email)}" style="font-size: 16px; color: ${ACCENT_COLOR}; font-weight: 500; text-decoration: none;">${escapeHtml(email)}</a>`
+                          : `<span style="font-size: 14px; color: #a1a1aa; font-weight: 500; font-style: italic;">Not provided — can't reply</span>`
+                        }
                       </td>
                     </tr>
                   </table>
@@ -212,19 +226,26 @@ export default async function handler(req, res) {
     const { subject, html } = buildEmailTemplate(sanitizedData);
 
     // 7. Dispatch via Resend API
+    // reply_to is only included when an email was actually provided —
+    // anonymous feedback has no address to reply to, and sending an
+    // empty/blank reply_to to Resend can itself cause a rejected request.
+    const resendPayload = {
+      from: FROM_EMAIL,
+      to: [toEmail],
+      subject,
+      html,
+    };
+    if (sanitizedData.email) {
+      resendPayload.reply_to = sanitizedData.email;
+    }
+
     const resendRes = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        from: FROM_EMAIL,
-        to: [toEmail],
-        reply_to: sanitizedData.email, 
-        subject,
-        html,
-      }),
+      body: JSON.stringify(resendPayload),
     });
 
     if (!resendRes.ok) {
