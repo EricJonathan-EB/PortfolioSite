@@ -11,7 +11,7 @@ const sections = [
   { id: 'published',  label: 'Published' },
   { id: 'hackathons', label: 'Hackathon' },
   { id: 'projects',   label: 'Projects' },
-  { id: 'socials',    label: 'Contact' },
+  { id: 'socials',    label: 'Get In Touch' },
 ]
 
 const Navbar = () => {
